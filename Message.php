@@ -6,40 +6,8 @@ namespace Capirussa\Pushover;
  *
  * @package Capirussa\Pushover
  */
-class Message
+class Message implements Request
 {
-    /**
-     * Validation regular expression to validate whether a recipient token is properly formatted
-     *
-     */
-    const RECIPIENT_REGEXP = '/^[0-9a-z]{30}$/i';
-    const DEVICE_REGEXP    = '/^[0-9a-z_]{,25}$/i';
-
-    /**
-     * Valid priorities for message
-     *
-     */
-    const PRIORITY_INVISIBLE = -2;
-    const PRIORITY_SILENT    = -1;
-    const PRIORITY_NORMAL    = 0;
-    const PRIORITY_HIGH      = 1;
-    const PRIORITY_EMERGENCY = 2;
-
-    /**
-     * POST data field names for the Pushover API
-     *
-     */
-    const TOKEN     = 'token';
-    const RECIPIENT = 'user';
-    const MESSAGE   = 'message';
-    const TITLE     = 'title';
-    const DEVICE    = 'device';
-    const URL       = 'url';
-    const URL_TITLE = 'url_title';
-    const PRIORITY  = 'priority';
-    const TIMESTAMP = 'timestamp';
-    const SOUND     = 'sound';
-
     /**
      * User or group key to send the message to
      *
@@ -104,6 +72,13 @@ class Message
     protected $sound;
 
     /**
+     * Callback URL (only applicable to Emergency messages)
+     *
+     * @type string
+     */
+    protected $callback;
+
+    /**
      * Constructor -- allows initializing the message with a recipient and message body
      *
      */
@@ -130,7 +105,7 @@ class Message
     public function setRecipient($recipient)
     {
         // validate the recipient token
-        if (!preg_match(self::RECIPIENT_REGEXP, $recipient)) {
+        if (!preg_match(Request::RECIPIENT_REGEXP, $recipient)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid recipient token "%2$s", token should be a 30-character alphanumeric string',
@@ -166,6 +141,16 @@ class Message
             );
         }
 
+        // make sure the message is not too long
+        if ((mb_strlen($message) + mb_strlen($this->title)) > 512) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    '%1$s: Message is too long, message + title cannot be more than 512 characters',
+                    __METHOD__
+                )
+            );
+        }
+
         // set the message body
         $this->message = $message;
 
@@ -192,6 +177,26 @@ class Message
             );
         }
 
+        // make sure the title is not too long
+        if (mb_strlen($title) > 100) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    '%1$s: Title is too long, cannot be more than 100 characters',
+                    __METHOD__
+                )
+            );
+        }
+
+        // make sure the title is not too long
+        if ((mb_strlen($title) + mb_strlen($this->message)) > 512) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    '%1$s: Title is too long, message + title cannot be more than 512 characters',
+                    __METHOD__
+                )
+            );
+        }
+
         // set the message title
         $this->title = $title;
 
@@ -209,7 +214,7 @@ class Message
     public function setDevice($device)
     {
         // validate the device title
-        if (!preg_match(self::DEVICE_REGEXP, $device)) {
+        if (!preg_match(Request::DEVICE_REGEXP, $device)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid device format, must contain only a-z, A-Z, 0-9, _ or - and must be 25 characters or less',
@@ -244,6 +249,16 @@ class Message
             );
         }
 
+        // make sure the url is not too long
+        if (mb_strlen($url) > 512) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    '%1$s: URL is too long, cannot be more than 512 characters',
+                    __METHOD__
+                )
+            );
+        }
+
         // set the message url
         $this->url = $url;
 
@@ -270,6 +285,16 @@ class Message
             );
         }
 
+        // make sure the title is not too long
+        if (mb_strlen($title) > 100) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    '%1$s: URL title is too long, cannot be more than 100 characters',
+                    __METHOD__
+                )
+            );
+        }
+
         // set the url title
         $this->urlTitle = $title;
 
@@ -287,7 +312,7 @@ class Message
     public function setPriority($priority)
     {
         // validate the message priority
-        if (!in_array($priority, array(self::PRIORITY_INVISIBLE, self::PRIORITY_SILENT, self::PRIORITY_NORMAL, self::PRIORITY_HIGH, self::PRIORITY_EMERGENCY))) {
+        if (!in_array($priority, array(Request::PRIORITY_INVISIBLE, Request::PRIORITY_SILENT, Request::PRIORITY_NORMAL, Request::PRIORITY_HIGH, Request::PRIORITY_EMERGENCY))) {
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid message priority',
@@ -306,20 +331,25 @@ class Message
     /**
      * Sets the message timestamp
      *
-     * @param int $timestamp Message timestamp to send
+     * @param int|\DateTime $timestamp Message timestamp to send
      * @throws \InvalidArgumentException if the given timestamp is invalid
      * @return static
      */
     public function setTimestamp($timestamp)
     {
         // validate the message timestamp
-        if (!is_int($timestamp)) {
+        if (!is_int($timestamp) && !($timestamp instanceof \DateTime)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    '%1$s: Invalid message timestamp, must be an integer',
+                    '%1$s: Invalid message timestamp, must be an integer or DateTime object',
                     __METHOD__
                 )
             );
+        }
+
+        // if the timestamp is a DateTime object, retrieve the timestamp from it
+        if ($timestamp instanceof \DateTime) {
+            $timestamp = $timestamp->getTimestamp();
         }
 
         // set the message timestamp
@@ -356,6 +386,32 @@ class Message
     }
 
     /**
+     * Sets the callback url
+     *
+     * @param string $url Callback url to send
+     * @throws \InvalidArgumentException if the given url is empty
+     * @return static
+     */
+    public function setCallbackUrl($url)
+    {
+        // validate the callback url
+        if (trim($url) == '') {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    '%1$s: Invalid URL, must not be empty',
+                    __METHOD__
+                )
+            );
+        }
+
+        // set the callback url
+        $this->callback = $url;
+
+        // return this Message for easy method chaining
+        return $this;
+    }
+
+    /**
      * Returns the array of POST data to submit to Pushover for this message
      *
      * @return array
@@ -364,35 +420,39 @@ class Message
     {
         $retValue = array();
 
-        $retValue[self::RECIPIENT] = $this->recipient;
-        $retValue[self::MESSAGE]   = $this->message;
+        $retValue[Request::RECIPIENT] = $this->recipient;
+        $retValue[Request::MESSAGE]   = $this->message;
 
         if ($this->title !== null) {
-            $retValue[self::TITLE] = $this->title;
+            $retValue[Request::TITLE] = $this->title;
         }
 
         if ($this->device !== null) {
-            $retValue[self::DEVICE] = $this->device;
+            $retValue[Request::DEVICE] = $this->device;
         }
 
         if ($this->url !== null) {
-            $retValue[self::URL] = $this->url;
-        }
+            $retValue[Request::URL] = $this->url;
 
-        if ($this->urlTitle !== null) {
-            $retValue[self::URL_TITLE] = $this->urlTitle;
+            if ($this->urlTitle !== null) {
+                $retValue[Request::URL_TITLE] = $this->urlTitle;
+            }
         }
 
         if ($this->priority !== null) {
-            $retValue[self::PRIORITY] = $this->priority;
+            $retValue[Request::PRIORITY] = $this->priority;
+
+            if ($this->priority == Request::PRIORITY_EMERGENCY && $this->callback !== null) {
+                $retValue[Request::CALLBACK] = $this->callback;
+            }
         }
 
         if ($this->timestamp !== null) {
-            $retValue[self::TIMESTAMP] = $this->timestamp;
+            $retValue[Request::TIMESTAMP] = $this->timestamp;
         }
 
         if ($this->sound !== null && $this->sound !== Sound::USER_DEFAULT) {
-            $retValue[self::SOUND] = $this->sound;
+            $retValue[Request::SOUND] = $this->sound;
         }
 
         return $retValue;

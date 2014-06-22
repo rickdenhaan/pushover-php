@@ -189,7 +189,7 @@ class Sound
         $definedConstants = $reflectionClass->getConstants();
 
         $soundIsValid = false;
-        foreach ($definedConstants as $constantName => $constantValue) {
+        foreach ($definedConstants as $constantValue) {
             if ($constantValue == $sound) {
                 $soundIsValid = true;
                 break;
