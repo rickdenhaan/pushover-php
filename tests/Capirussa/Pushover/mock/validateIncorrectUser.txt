@@ -1,0 +1,14 @@
+HTTP/1.1 100 Continue
+
+HTTP/1.1 400 Bad Request
+Date: Wed, 02 Jul 2014 20:16:52 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Status: 400 Bad Request
+X-UA-Compatible: IE=Edge,chrome=1
+Cache-Control: no-cache
+X-Request-Id: 50afa541b446e55d6434ae6e04363e96
+X-Runtime: 0.005833
+
+{"user":"invalid","errors":["user key is invalid"],"status":0,"request":"50afa541b446e55d6434ae6e04363e96"}

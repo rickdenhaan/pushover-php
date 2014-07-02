@@ -1,0 +1,16 @@
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Wed, 02 Jul 2014 19:58:22 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Status: 200 OK
+X-UA-Compatible: IE=Edge,chrome=1
+ETag: "802ec17dad43d4449b039df489d8ed79"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: db7325f6a046f4644233b7a8baad2d95
+X-Runtime: 0.012290
+X-Frame-Options: DENY
+
+{"status":1,"group":0,"devices":["iphone","ipad","android"],"request":"db7325f6a046f4644233b7a8baad2d95"}

@@ -7,16 +7,17 @@
     "authors": [
         {
             "name": "Rick den Haan",
-            "email": "rick@capirussa.nl"
+            "email": "rick@capirussa.nl",
+            "homepage": "http://capirussa.nl",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": ">=5.2.4"
     },
     "autoload": {
-        "psr-0" : {
-            "Capirussa\\Pushover\\" : ""
+        "psr-4" : {
+            "Capirussa\\Pushover\\" : "Capirussa/Pushover/"
         }
-    },
-    "target-dir": "Capirussa/Pushover"
+    }
 }

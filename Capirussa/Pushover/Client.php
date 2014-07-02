@@ -36,13 +36,16 @@ class Client
     private $validateSsl = true;
 
     /**
-     * Returns the current instance of the Client. Does not perform lazy instantiation, because you should use
-     * static::init() for that.
+     * Returns the current instance of the Client, or instantiates one of that hasn't happened yet
      *
-     * @return static|null
+     * @return static
      */
     public static function getInstance()
     {
+        if (self::$instance === null) {
+            self::$instance = new static();
+        }
+
         return self::$instance;
     }
 
