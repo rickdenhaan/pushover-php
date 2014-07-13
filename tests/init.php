@@ -3,6 +3,8 @@
  * Prepares a simple autoloader for the Capirussa\Pushover namespace
  */
 
+date_default_timezone_set('Europe/Amsterdam');
+
 // handle autoloading
 spl_autoload_register(
     function ($className) {
@@ -22,3 +24,16 @@ spl_autoload_register(
     }
 );
 
+/**
+ * Outputs log entries for unittest debugging
+ *
+ * @param string $message
+ */
+function unittest_log($message)
+{
+    printf(
+        "[%1\$s] %2\$s\n",
+        date('H:i:s'),
+        $message
+    );
+}

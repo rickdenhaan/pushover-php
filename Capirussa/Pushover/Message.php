@@ -84,13 +84,16 @@ class Message implements Request
      */
     public function __construct($recipient = null, $message = null)
     {
+        if (function_exists('unittest_log')) unittest_log('Message::__construct()');
         // if a recipient was given, set it
         if ($recipient !== null) {
+            if (function_exists('unittest_log')) unittest_log('Setting recipient token to ' . $recipient);
             $this->setRecipient($recipient);
         }
 
         // if a message was given, set it
         if ($message !== null) {
+            if (function_exists('unittest_log')) unittest_log('Setting message to ' . $message);
             $this->setMessage($message);
         }
     }
@@ -104,8 +107,10 @@ class Message implements Request
      */
     public function setRecipient($recipient)
     {
+        if (function_exists('unittest_log')) unittest_log('Message::setRecipient()');
         // validate the recipient token
         if (!preg_match(Request::RECIPIENT_REGEXP, $recipient)) {
+            if (function_exists('unittest_log')) unittest_log('Recipient token does not match regular expression, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid recipient token "%2$s", token should be a 30-character alphanumeric string',
@@ -116,9 +121,11 @@ class Message implements Request
         }
 
         // set the recipient token
+        if (function_exists('unittest_log')) unittest_log('Recipient token matches regular expression, setting it');
         $this->recipient = $recipient;
 
         // return this Message for easy method chaining
+        if (function_exists('unittest_log')) unittest_log('Returning');
         return $this;
     }
 
@@ -131,8 +138,10 @@ class Message implements Request
      */
     public function setMessage($message)
     {
+        if (function_exists('unittest_log')) unittest_log('Message::setMessage()');
         // validate the message body
         if (trim($message) == '') {
+            if (function_exists('unittest_log')) unittest_log('Message is empty, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid message body, body must not be empty',
@@ -143,6 +152,7 @@ class Message implements Request
 
         // make sure the message is not too long
         if ((mb_strlen($message) + mb_strlen($this->title)) > 512) {
+            if (function_exists('unittest_log')) unittest_log('Message+Title combination is too long, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Message is too long, message + title cannot be more than 512 characters',
@@ -152,9 +162,11 @@ class Message implements Request
         }
 
         // set the message body
+        if (function_exists('unittest_log')) unittest_log('Message appears to be OK, setting it');
         $this->message = $message;
 
         // return this Message for easy method chaining
+        if (function_exists('unittest_log')) unittest_log('Returning');
         return $this;
     }
 
@@ -167,8 +179,10 @@ class Message implements Request
      */
     public function setTitle($title)
     {
+        if (function_exists('unittest_log')) unittest_log('Message::setTitle()');
         // validate the message title
         if (trim($title) == '') {
+            if (function_exists('unittest_log')) unittest_log('Title is empty, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid message title, must not be empty',
@@ -179,6 +193,7 @@ class Message implements Request
 
         // make sure the title is not too long
         if (mb_strlen($title) > 100) {
+            if (function_exists('unittest_log')) unittest_log('Title is too long, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Title is too long, cannot be more than 100 characters',
@@ -189,6 +204,7 @@ class Message implements Request
 
         // make sure the title is not too long
         if ((mb_strlen($title) + mb_strlen($this->message)) > 512) {
+            if (function_exists('unittest_log')) unittest_log('Title+Message combination is too long, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Title is too long, message + title cannot be more than 512 characters',
@@ -198,9 +214,11 @@ class Message implements Request
         }
 
         // set the message title
+        if (function_exists('unittest_log')) unittest_log('Title appears to be OK, setting it');
         $this->title = $title;
 
         // return this Message for easy method chaining
+        if (function_exists('unittest_log')) unittest_log('Returning');
         return $this;
     }
 
@@ -213,8 +231,10 @@ class Message implements Request
      */
     public function setDevice($device)
     {
+        if (function_exists('unittest_log')) unittest_log('Message::setDevice()');
         // validate the device title
         if (!preg_match(Request::DEVICE_REGEXP, $device)) {
+            if (function_exists('unittest_log')) unittest_log('Device identifier does not match regular expression, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid device format, must contain only a-z, A-Z, 0-9, _ or - and must be 25 characters or less',
@@ -224,9 +244,11 @@ class Message implements Request
         }
 
         // set the device
+        if (function_exists('unittest_log')) unittest_log('Device identifier matches regular expression, setting it');
         $this->device = $device;
 
         // return this Message for easy method chaining
+        if (function_exists('unittest_log')) unittest_log('Returning');
         return $this;
     }
 
@@ -239,8 +261,10 @@ class Message implements Request
      */
     public function setUrl($url)
     {
+        if (function_exists('unittest_log')) unittest_log('Message::setUrl()');
         // validate the message url
         if (trim($url) == '') {
+            if (function_exists('unittest_log')) unittest_log('URL is empty, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid URL, must not be empty',
@@ -251,6 +275,7 @@ class Message implements Request
 
         // make sure the url is not too long
         if (mb_strlen($url) > 512) {
+            if (function_exists('unittest_log')) unittest_log('URL is too long, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: URL is too long, cannot be more than 512 characters',
@@ -260,9 +285,11 @@ class Message implements Request
         }
 
         // set the message url
+        if (function_exists('unittest_log')) unittest_log('URL appears to be OK, setting it');
         $this->url = $url;
 
         // return this Message for easy method chaining
+        if (function_exists('unittest_log')) unittest_log('Returning');
         return $this;
     }
 
@@ -275,8 +302,10 @@ class Message implements Request
      */
     public function setUrlTitle($title)
     {
+        if (function_exists('unittest_log')) unittest_log('Message::setUrlTitle()');
         // validate the url title
         if (trim($title) == '') {
+            if (function_exists('unittest_log')) unittest_log('URL title is empty, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid URL title, must not be empty',
@@ -287,6 +316,7 @@ class Message implements Request
 
         // make sure the title is not too long
         if (mb_strlen($title) > 100) {
+            if (function_exists('unittest_log')) unittest_log('URL title is too long, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: URL title is too long, cannot be more than 100 characters',
@@ -296,9 +326,11 @@ class Message implements Request
         }
 
         // set the url title
+        if (function_exists('unittest_log')) unittest_log('URL title appears to be OK, setting it');
         $this->urlTitle = $title;
 
         // return this Message for easy method chaining
+        if (function_exists('unittest_log')) unittest_log('Returning');
         return $this;
     }
 
@@ -311,8 +343,10 @@ class Message implements Request
      */
     public function setPriority($priority)
     {
+        if (function_exists('unittest_log')) unittest_log('Message::setPriority()');
         // validate the message priority
         if (!in_array($priority, array(Request::PRIORITY_INVISIBLE, Request::PRIORITY_SILENT, Request::PRIORITY_NORMAL, Request::PRIORITY_HIGH, Request::PRIORITY_EMERGENCY))) {
+            if (function_exists('unittest_log')) unittest_log('Priority is not in the list of accepted priorities, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid message priority',
@@ -322,9 +356,11 @@ class Message implements Request
         }
 
         // set the message priority
+        if (function_exists('unittest_log')) unittest_log('Priority appears to be OK, setting it');
         $this->priority = $priority;
 
         // return this Message for easy method chaining
+        if (function_exists('unittest_log')) unittest_log('Returning');
         return $this;
     }
 
@@ -337,8 +373,10 @@ class Message implements Request
      */
     public function setTimestamp($timestamp)
     {
+        if (function_exists('unittest_log')) unittest_log('Message::setTimestamp()');
         // validate the message timestamp
         if (!is_int($timestamp) && !($timestamp instanceof \DateTime)) {
+            if (function_exists('unittest_log')) unittest_log('Timestamp is not an int or DateTime, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid message timestamp, must be an integer or DateTime object',
@@ -349,13 +387,16 @@ class Message implements Request
 
         // if the timestamp is a DateTime object, retrieve the timestamp from it
         if ($timestamp instanceof \DateTime) {
+            if (function_exists('unittest_log')) unittest_log('Timestamp is a DateTime, getting timestamp');
             $timestamp = $timestamp->getTimestamp();
         }
 
         // set the message timestamp
+        if (function_exists('unittest_log')) unittest_log('Setting timestamp');
         $this->timestamp = $timestamp;
 
         // return this Message for easy method chaining
+        if (function_exists('unittest_log')) unittest_log('Returning');
         return $this;
     }
 
@@ -368,8 +409,10 @@ class Message implements Request
      */
     public function setSound($sound)
     {
+        if (function_exists('unittest_log')) unittest_log('Message::setSound()');
         // validate the message title
         if (!($sound instanceof Sound) && !Sound::isValidSound($sound)) {
+            if (function_exists('unittest_log')) unittest_log('Sound is invalid, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid message sound, must not be empty',
@@ -379,9 +422,11 @@ class Message implements Request
         }
 
         // set the message sound
+        if (function_exists('unittest_log')) unittest_log('Sound appears to be OK, setting it');
         $this->sound = (string)$sound;
 
         // return this Message for easy method chaining
+        if (function_exists('unittest_log')) unittest_log('Returning');
         return $this;
     }
 
@@ -394,8 +439,10 @@ class Message implements Request
      */
     public function setCallbackUrl($url)
     {
+        if (function_exists('unittest_log')) unittest_log('Message::setCallbackUrl()');
         // validate the callback url
         if (trim($url) == '') {
+            if (function_exists('unittest_log')) unittest_log('Callback URL is empty, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid URL, must not be empty',
@@ -405,9 +452,11 @@ class Message implements Request
         }
 
         // set the callback url
+        if (function_exists('unittest_log')) unittest_log('Callback URL appears to be OK, setting it');
         $this->callback = $url;
 
         // return this Message for easy method chaining
+        if (function_exists('unittest_log')) unittest_log('Returning');
         return $this;
     }
 
@@ -418,43 +467,54 @@ class Message implements Request
      */
     public function getPushoverFields()
     {
+        if (function_exists('unittest_log')) unittest_log('Message::getPushoverFields()');
         $retValue = array();
 
+        if (function_exists('unittest_log')) unittest_log('Adding recipient token and message to return data');
         $retValue[Request::RECIPIENT] = $this->recipient;
         $retValue[Request::MESSAGE]   = $this->message;
 
         if ($this->title !== null) {
+            if (function_exists('unittest_log')) unittest_log('Adding title to return data');
             $retValue[Request::TITLE] = $this->title;
         }
 
         if ($this->device !== null) {
+            if (function_exists('unittest_log')) unittest_log('Adding device identifier to return data');
             $retValue[Request::DEVICE] = $this->device;
         }
 
         if ($this->url !== null) {
+            if (function_exists('unittest_log')) unittest_log('Adding URL to return data');
             $retValue[Request::URL] = $this->url;
 
             if ($this->urlTitle !== null) {
+                if (function_exists('unittest_log')) unittest_log('Adding URL title to return data');
                 $retValue[Request::URL_TITLE] = $this->urlTitle;
             }
         }
 
         if ($this->priority !== null) {
+            if (function_exists('unittest_log')) unittest_log('Adding priority to return data');
             $retValue[Request::PRIORITY] = $this->priority;
 
             if ($this->priority == Request::PRIORITY_EMERGENCY && $this->callback !== null) {
+                if (function_exists('unittest_log')) unittest_log('Adding callback URL to return data');
                 $retValue[Request::CALLBACK] = $this->callback;
             }
         }
 
         if ($this->timestamp !== null) {
+            if (function_exists('unittest_log')) unittest_log('Adding timestamp to return data');
             $retValue[Request::TIMESTAMP] = $this->timestamp;
         }
 
         if ($this->sound !== null && $this->sound !== Sound::USER_DEFAULT) {
+            if (function_exists('unittest_log')) unittest_log('Adding sound to return data');
             $retValue[Request::SOUND] = $this->sound;
         }
 
+        if (function_exists('unittest_log')) unittest_log('Returning');
         return $retValue;
     }
 }

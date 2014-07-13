@@ -15,6 +15,8 @@ class ExceptionTest extends PHPUnit_Framework_TestCase
      */
     public function testException()
     {
+        if (function_exists('unittest_log')) unittest_log('ExceptionTest::testException()');
+        if (function_exists('unittest_log')) unittest_log('Throwing Exception');
         throw new Exception('testException');
     }
 }
