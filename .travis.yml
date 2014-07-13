@@ -10,9 +10,9 @@ before_script:
   - composer require satooshi/php-coveralls:dev-master
 
 script:
-  - phpunit --colors .
+  - phpunit --colors ./tests
   - mkdir -p build/logs
-  - phpunit --coverage-clover build/logs/clover.xml
+  - phpunit --coverage-clover build/logs/clover.xml ./tests
 
 after_script:
   - php vendor/bin/coveralls -v
