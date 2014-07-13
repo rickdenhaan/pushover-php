@@ -1,6 +1,9 @@
 Pushover PHP client
 ===================
 
+[![Build Status](https://travis-ci.org/rickdenhaan/pushover-php.png?branch=master)](https://travis-ci.org/rickdenhaan/pushover-php)
+[![Coverage Status](https://coveralls.io/repos/rickdenhaan/pushover-php/badge.png?branch=master)](https://coveralls.io/r/rickdenhaan/pushover-php)
+
 This simple PHP client uses the Pushover REST API to send push notifications to mobile devices. For more information about Pushover, see http://pushover.net
 
 
