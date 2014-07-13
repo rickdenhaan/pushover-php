@@ -122,7 +122,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Capirussa\Pushover\Exception
+     * @expectedException Capirussa\Pushover\Exception
      * @expectedExceptionMessage user key is invalid
      */
     public function testGetUserDevicesForIncorrectUser()
