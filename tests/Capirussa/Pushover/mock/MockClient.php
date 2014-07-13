@@ -21,20 +21,20 @@ class MockClient extends Pushover\Client
      */
     protected function doRequest($entryPoint, $request)
     {
-        if (function_exists('unittest_log')) unittest_log('MockClient::doRequest()');
         if ($entryPoint === Pushover\Request::API_VALIDATE && $request instanceof Pushover\Validate) {
-            if (function_exists('unittest_log')) unittest_log('$entryPoint == API_VALIDATE && $request instanceof Pushover\\Validate');
             $data = $request->getPushoverFields();
-            if ($data[Pushover\Request::RECIPIENT] == self::VALID_RECIPIENT_TOKEN) {
-                if (function_exists('unittest_log')) unittest_log('$data[RECIPIENT] == VALID_RECIPIENT_TOKEN');
-                return new Pushover\Response(file_get_contents(dirname(__FILE__) . '/validateValidUser.txt'));
-            } elseif ($data[Pushover\Request::RECIPIENT] == self::INCORRECT_RECIPIENT_TOKEN) {
-                if (function_exists('unittest_log')) unittest_log('$data[RECIPIENT] == INCORRECT_RECIPIENT_TOKEN');
-                return new Pushover\Response(file_get_contents(dirname(__FILE__) . '/validateIncorrectUser.txt'));
-            }
-        }
+            $simulatedResponse = '';
 
-        if (function_exists('unittest_log')) unittest_log('Unknown entrypoint or request, throwing Pushover\\Exception');
-        throw new Pushover\Exception('Invalid request');
+            if ($data[Pushover\Request::RECIPIENT] == self::VALID_RECIPIENT_TOKEN) {
+                $simulatedResponse = file_get_contents(dirname(__FILE__) . '/validateValidUser.txt');
+            } elseif ($data[Pushover\Request::RECIPIENT] == self::INCORRECT_RECIPIENT_TOKEN) {
+                $simulatedResponse = file_get_contents(dirname(__FILE__) . '/validateIncorrectUser.txt');
+            }
+
+            $simulatedResponse = str_replace(array("\r\n", "\n\r", "\r", "\n"), "\r\n", $simulatedResponse);
+            $this->response = new Pushover\Response($simulatedResponse);
+        } else {
+            throw new Pushover\Exception('Invalid request');
+        }
     }
 }

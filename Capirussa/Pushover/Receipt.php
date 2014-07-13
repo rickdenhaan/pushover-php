@@ -21,10 +21,8 @@ class Receipt implements Request
      */
     public function __construct($receipt = null)
     {
-        if (function_exists('unittest_log')) unittest_log('Receipt::__construct()');
         // if a receipt was given, set it
         if ($receipt !== null) {
-            if (function_exists('unittest_log')) unittest_log('Setting receipt token ' . $receipt);
             $this->setReceipt($receipt);
         }
     }
@@ -38,10 +36,8 @@ class Receipt implements Request
      */
     public function setReceipt($receipt)
     {
-        if (function_exists('unittest_log')) unittest_log('Receipt::setReceipt()');
         // validate the receipt token
         if (!preg_match(Request::RECEIPT_REGEXP, $receipt)) {
-            if (function_exists('unittest_log')) unittest_log('Receipt token does not match regular expression, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid receipt "%2$s", token should be a 30-character alphanumeric string',
@@ -52,11 +48,9 @@ class Receipt implements Request
         }
 
         // set the receipt token
-        if (function_exists('unittest_log')) unittest_log('Receipt token appears to be OK, setting it');
         $this->receipt = $receipt;
 
         // return this Receipt for easy method chaining
-        if (function_exists('unittest_log')) unittest_log('Returning');
         return $this;
     }
 
@@ -67,8 +61,6 @@ class Receipt implements Request
      */
     public function getReceipt()
     {
-        if (function_exists('unittest_log')) unittest_log('Receipt::getReceipt()');
-        if (function_exists('unittest_log')) unittest_log('Returning receipt ' . $this->receipt);
         return $this->receipt;
     }
 
@@ -79,8 +71,6 @@ class Receipt implements Request
      */
     public function getPushoverFields()
     {
-        if (function_exists('unittest_log')) unittest_log('Receipt::getPushoverFields()');
-        if (function_exists('unittest_log')) unittest_log('Returning empty array, Receipt does not have any post data');
         return array();
     }
 }

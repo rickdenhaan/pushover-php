@@ -161,11 +161,8 @@ class Sound
      */
     public function __construct($sound = self::USER_DEFAULT)
     {
-        if (function_exists('unittest_log')) unittest_log('Sound::__construct()');
         // validate the sound by checking whether it is defined as a constant in this class
-        if (function_exists('unittest_log')) unittest_log('Validating sound');
         if (!self::isValidSound($sound)) {
-            if (function_exists('unittest_log')) unittest_log('Sound is not valid, throwing InvalidArgumentException');
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid sound \'%2$s\' given',
@@ -176,7 +173,6 @@ class Sound
         }
 
         // set the sound
-        if (function_exists('unittest_log')) unittest_log('Sound appears to be OK, setting it');
         $this->sound = $sound;
     }
 
@@ -188,23 +184,18 @@ class Sound
      */
     public static function isValidSound($sound)
     {
-        if (function_exists('unittest_log')) unittest_log('Sound::isValidSound()');
         // validate the sound by checking whether it is defined as a constant in this class
-        if (function_exists('unittest_log')) unittest_log('Getting reflection class');
         $reflectionClass = new \ReflectionClass(get_class());
-        if (function_exists('unittest_log')) unittest_log('Getting constants');
         $definedConstants = $reflectionClass->getConstants();
 
         $soundIsValid = false;
         foreach ($definedConstants as $constantValue) {
             if ($constantValue == $sound) {
-                if (function_exists('unittest_log')) unittest_log('Found ' . $sound . ' in constants, sound is valid');
                 $soundIsValid = true;
                 break;
             }
         }
 
-        if (function_exists('unittest_log')) unittest_log('Returning that sound is' . (!$soundIsValid ? ' not' : '') . ' valid');
         return $soundIsValid;
     }
 
@@ -215,8 +206,6 @@ class Sound
      */
     public function __toString()
     {
-        if (function_exists('unittest_log')) unittest_log('Sound::__toString()');
-        if (function_exists('unittest_log')) unittest_log('Returning ' . $this->sound);
         return $this->sound;
     }
 }
