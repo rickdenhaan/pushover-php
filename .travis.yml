@@ -1,7 +1,18 @@
 language: php
+
 php:
   - 5.5
   - 5.4
   - 5.3
   - hhvm
-script: phpunit --colors .
+
+before_script:
+  - composer require satooshi/php-coveralls:dev-master
+
+script:
+  - phpunit --colors .
+  - mkdir -p build/logs
+  - phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+  - php vendor/bin/coveralls -v
