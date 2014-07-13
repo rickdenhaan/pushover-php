@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . '/../../init.php');
+require_once(dirname(__FILE__) . '/../../../init.php');
 
 use Capirussa\Pushover;
 
@@ -16,9 +16,9 @@ class MockClient extends Pushover\Client
         if ($entryPoint === Pushover\Request::API_VALIDATE && $request instanceof Pushover\Validate) {
             $data = $request->getPushoverFields();
             if ($data[Pushover\Request::RECIPIENT] == self::VALID_RECIPIENT_TOKEN) {
-                return new Pushover\Response(file_get_contents(dirname(__FILE__) . '/mock/validateValidUser.txt'));
+                return new Pushover\Response(file_get_contents(dirname(__FILE__) . '/validateValidUser.txt'));
             } elseif ($data[Pushover\Request::RECIPIENT] == self::INCORRECT_RECIPIENT_TOKEN) {
-                return new Pushover\Response(file_get_contents(dirname(__FILE__) . '/mock/validateIncorrectUser.txt'));
+                return new Pushover\Response(file_get_contents(dirname(__FILE__) . '/validateIncorrectUser.txt'));
             }
         }
 

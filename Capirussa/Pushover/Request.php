@@ -14,7 +14,7 @@ interface Request
      */
     const RECEIPT_REGEXP   = '/^[0-9a-z]{30}$/i';
     const RECIPIENT_REGEXP = '/^[0-9a-z]{30}$/i';
-    const DEVICE_REGEXP    = '/^[0-9a-z_]{,25}$/i';
+    const DEVICE_REGEXP    = '/^[0-9a-z_]{1,25}$/i';
 
     /**
      * Valid priorities for messages
@@ -32,7 +32,7 @@ interface Request
      */
     const API_MESSAGE  = 'messages';
     const API_VALIDATE = 'users/validate';
-    const API_RECEIPT  = 'receipts/{receipt}';
+    const API_RECEIPT  = 'receipts/%1$s';
 
     /**
      * POST data field names for the Pushover API

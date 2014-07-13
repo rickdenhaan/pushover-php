@@ -215,7 +215,7 @@ class Client
 
         // if we were asked to send a Receipt request, we need to submit a GET request instead of a POST request
         if ($request instanceof Receipt) {
-            $url = sprintf('https://api.pushover.net/1/receipts/%1$s.json?token=%2$s', $request->getReceipt(), $this->appToken);
+            $url = sprintf($url, $request->getReceipt()) . '?token=' . $this->appToken;
 
             unset($curlOptions[CURLOPT_POSTFIELDS]);
             unset($curlOptions[CURLOPT_POST]);
