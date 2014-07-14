@@ -41,7 +41,7 @@ class MockClient extends Pushover\Client
                 $simulatedResponse = file_get_contents(dirname(__FILE__) . '/validateInactiveUser.txt');
             }
         } elseif ($entryPoint === Pushover\Request::API_MESSAGE && $request instanceof Pushover\Message) {
-            if ($data[Pushover\Request::RECIPIENT] == self::VALID_RECIPIENT_TOKEN && $data[Pushover\Request::DEVICE] == self::INCORRECT_DEVICE_TOKEN) {
+            if ($data[Pushover\Request::RECIPIENT] == self::VALID_RECIPIENT_TOKEN && isset($data[Pushover\Request::DEVICE]) && $data[Pushover\Request::DEVICE] == self::INCORRECT_DEVICE_TOKEN) {
                 $simulatedResponse = file_get_contents(dirname(__FILE__) . '/sendUnknownDevice.txt');
             } elseif ($data[Pushover\Request::RECIPIENT] == self::INCORRECT_RECIPIENT_TOKEN) {
                 $simulatedResponse = file_get_contents(dirname(__FILE__) . '/sendIncorrectUser.txt');
