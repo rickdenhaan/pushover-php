@@ -49,6 +49,8 @@ interface Request
     const TIMESTAMP = 'timestamp';
     const SOUND     = 'sound';
     const CALLBACK  = 'callback';
+    const EXPIRE    = 'expire';
+    const RETRY     = 'retry';
 
     /**
      * Returns the array of POST data to submit to Pushover for this message

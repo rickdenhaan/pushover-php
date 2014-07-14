@@ -1,0 +1,21 @@
+HTTP/1.1 100 Continue
+
+HTTP/1.1 400 Bad Request
+Date: Mon, 14 Jul 2014 17:53:24 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Status: 400 Bad Request
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: POST, OPTIONS
+Access-Control-Allow-Headers: X-Requested-With, X-Prototype-Version, Origin, Accept, Content-Type, X-CSRF-Token, X-Pushover-App
+Access-Control-Max-Age: 1728000
+X-Limit-App-Limit: 7500
+X-Limit-App-Remaining: 7499
+X-Limit-App-Reset: 1406869200
+X-UA-Compatible: IE=Edge,chrome=1
+Cache-Control: no-cache
+X-Request-Id: ace93e1e782d2f3535f13ff919c41b87
+X-Runtime: 0.007200
+
+{"user":"invalid","errors":["user identifier is invalid"],"status":0,"request":"ace93e1e782d2f3535f13ff919c41b87"}

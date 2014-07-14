@@ -1,0 +1,23 @@
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Mon, 14 Jul 2014 18:25:45 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Status: 200 OK
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: POST, OPTIONS
+Access-Control-Allow-Headers: X-Requested-With, X-Prototype-Version, Origin, Accept, Content-Type, X-CSRF-Token, X-Pushover-App
+Access-Control-Max-Age: 1728000
+X-Limit-App-Limit: 7500
+X-Limit-App-Remaining: 7496
+X-Limit-App-Reset: 1406869200
+X-UA-Compatible: IE=Edge,chrome=1
+ETag: "7c50aed6e835ebd1bc25fb4f46b4691b"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 0353d20fddf867f43ff12e5f1f6d8882
+X-Runtime: 0.017981
+X-Frame-Options: DENY
+
+{"receipt":"testValidReceiptTokenForPoll12","status":1,"request":"0353d20fddf867f43ff12e5f1f6d8882"}

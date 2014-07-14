@@ -176,7 +176,7 @@ class Response
             if (empty($responseLine)) continue;
 
             if (substr($responseLine, 0, 1) == '{') {
-                $response['body'] = $responseLine;
+                $response['body'] = trim($responseLine);
                 break;
             } elseif (strtoupper(substr($responseLine, 0, 5)) == 'HTTP/') {
                 $response['status'] = substr($responseLine, 9, 3);

@@ -1,0 +1,14 @@
+HTTP/1.1 100 Continue
+
+HTTP/1.1 400 Bad Request
+Date: Mon, 14 Jul 2014 18:38:24 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Status: 400 Bad Request
+X-UA-Compatible: IE=Edge,chrome=1
+Cache-Control: no-cache
+X-Request-Id: 8800a46d2e66b3d7dae6ef69ddc23bf3
+X-Runtime: 0.008210
+
+{"device":"invalid for this user","errors":["device name is not valid for user"],"status":0,"request":"8800a46d2e66b3d7dae6ef69ddc23bf3"}

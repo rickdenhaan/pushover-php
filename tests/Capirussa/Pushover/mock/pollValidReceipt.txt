@@ -1,0 +1,18 @@
+HTTP/1.1 200 OK
+Date: Mon, 14 Jul 2014 18:59:42 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Status: 200 OK
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: POST, OPTIONS
+Access-Control-Allow-Headers: X-Requested-With, X-Prototype-Version, Origin, Accept, Content-Type, X-CSRF-Token, X-Pushover-App
+Access-Control-Max-Age: 1728000
+X-UA-Compatible: IE=Edge,chrome=1
+ETag: "478d9bfff669ffe6adcd334621941da3"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 63a76a8ea0c67b0944a4e066f3a01a1f
+X-Runtime: 0.006843
+X-Frame-Options: DENY
+
+{"status":1,"acknowledged":1,"acknowledged_at":1405362483,"acknowledged_by":"testValidTokenOf30AlNumSymbols","last_delivered_at":1405362466,"expired":0,"expires_at":1405365945,"called_back":0,"called_back_at":0,"request":"63a76a8ea0c67b0944a4e066f3a01a1f"}

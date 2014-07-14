@@ -178,15 +178,26 @@ class Client
      * Validates whether a given recipient token and optional device identifier are registered Pushover users
      *
      * @param Validate $request Validation request to send
+     * @throws \Capirussa\Pushover\Exception
      * @return bool True if the recipient is valid, false otherwise
      */
     public function validate(Validate $request)
     {
         // send the validation request
-        $this->doRequest(Request::API_VALIDATE, $request);
+        try {
+            $this->doRequest(Request::API_VALIDATE, $request);
+
+            $retValue = ($this->response->getStatus() === Response::STATUS_SUCCESS);
+        } catch (Exception $e) {
+            if (strstr($e->getMessage(), 'device name is not valid for user')) {
+                $retValue = false;
+            } else {
+                throw $e;
+            }
+        }
 
         // return whether the request succeeded
-        return ($this->response->getStatus() === Response::STATUS_SUCCESS);
+        return $retValue;
     }
 
     /**
@@ -209,6 +220,9 @@ class Client
      * @param mixed  $request    Request to send
      * @throws Exception
      * @return void
+     *
+     * Unittests should never talk to the live Pushover API, they use a mock client, so:
+     * @codeCoverageIgnore
      */
     protected function doRequest($entryPoint, $request)
     {

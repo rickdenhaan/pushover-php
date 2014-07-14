@@ -79,6 +79,20 @@ class Message implements Request
     protected $callback;
 
     /**
+     * Number of seconds until the message expires (only applicable to Emergency messages)
+     *
+     * @type int
+     */
+    protected $expire;
+
+    /**
+     * Number of seconds between message deliveries (only applicable to Emergency messages)
+     *
+     * @type int
+     */
+    protected $retry;
+
+    /**
      * Constructor -- allows initializing the message with a recipient and message body
      *
      */
@@ -412,6 +426,62 @@ class Message implements Request
     }
 
     /**
+     * Sets the number of seconds until the message expires (only for Emergency messages)
+     *
+     * @param int $expire Number of seconds
+     * @throws \InvalidArgumentException if the given value is invalid
+     * @return static
+     */
+    public function setExpire($expire)
+    {
+        // validate the expire time
+        $expire = intval($expire, 10);
+
+        if ($expire <= 0 || $expire > 86400) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    '%1$s: Invalid expire delay, must be between 1 and 86400 seconds',
+                    __METHOD__
+                )
+            );
+        }
+
+        // set the expire time
+        $this->expire = $expire;
+
+        // return this Message for easy method chaining
+        return $this;
+    }
+
+    /**
+     * Sets the delay between message deliveries for Emergency messages
+     *
+     * @param int $retry Number of seconds between deliveries
+     * @throws \InvalidArgumentException if the given value is invalid
+     * @return static
+     */
+    public function setRetry($retry)
+    {
+        // validate the retry delay
+        $retry = intval($retry, 10);
+
+        if ($retry < 30 || $retry > 86400) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    '%1$s: Invalid retry delay, must be between 30 and 86400 seconds',
+                    __METHOD__
+                )
+            );
+        }
+
+        // set the retry delay
+        $this->retry = $retry;
+
+        // return this Message for easy method chaining
+        return $this;
+    }
+
+    /**
      * Returns the array of POST data to submit to Pushover for this message
      *
      * @return array
@@ -442,8 +512,13 @@ class Message implements Request
         if ($this->priority !== null) {
             $retValue[Request::PRIORITY] = $this->priority;
 
-            if ($this->priority == Request::PRIORITY_EMERGENCY && $this->callback !== null) {
-                $retValue[Request::CALLBACK] = $this->callback;
+            if ($this->priority == Request::PRIORITY_EMERGENCY) {
+                $retValue[Request::EXPIRE] = $this->expire === null ? 3600 : $this->expire;
+                $retValue[Request::RETRY]  = $this->retry === null ? 30 : $this->retry;
+
+                if ($this->callback !== null) {
+                    $retValue[Request::CALLBACK] = $this->callback;
+                }
             }
         }
 

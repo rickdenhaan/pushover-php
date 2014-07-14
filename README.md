@@ -57,6 +57,8 @@ To send a push notification via Pushover, you need to supply the Client with a M
 * Timestamp - an optional timestamp for this message. The setter will accept a DateTime object as well as a timestamp.
 * Sound - the sound to use for this message (defaults to the recipient user's preference). Must be one of the sounds defined in Pushover\Sound.
 * Callback URL - for messages with the priority set to PRIORITY_EMERGENCY, it's possible to supply a callback URL that Pushover will call when the message has been acknowledged.
+* Expire - required for PRIORITY_EMERGENCY messages, time in seconds until the message expires. Defaults to 3600 (1 hour), maximum value is 86400 (24 hours).
+* Retry - required for PRIORITY_EMERGENCY messages, time interval in seconds between re-deliveries. Defaults to the minimum value of 30 seconds.
 
 It is possible to initialize the Pushover\Message object with a recipient and message, as in the Usage example above. This is optional, you can also set these properties using their setters:
 
