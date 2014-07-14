@@ -30,7 +30,7 @@ class MockClient extends Pushover\Client
 
         if ($entryPoint === Pushover\Request::API_VALIDATE && $request instanceof Pushover\Validate) {
             if ($data[Pushover\Request::RECIPIENT] == self::VALID_RECIPIENT_TOKEN) {
-                if ($data[Pushover\Request::DEVICE] == self::INCORRECT_DEVICE_TOKEN) {
+                if (isset($data[Pushover\Request::DEVICE]) && $data[Pushover\Request::DEVICE] == self::INCORRECT_DEVICE_TOKEN) {
                     $simulatedResponse = file_get_contents(dirname(__FILE__) . '/validateIncorrectDevice.txt');
                 } else {
                     $simulatedResponse = file_get_contents(dirname(__FILE__) . '/validateValidUser.txt');
