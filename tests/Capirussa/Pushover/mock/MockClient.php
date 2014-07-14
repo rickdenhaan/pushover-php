@@ -46,7 +46,7 @@ class MockClient extends Pushover\Client
             } elseif ($data[Pushover\Request::RECIPIENT] == self::INCORRECT_RECIPIENT_TOKEN) {
                 $simulatedResponse = file_get_contents(dirname(__FILE__) . '/sendIncorrectUser.txt');
             } elseif ($data[Pushover\Request::RECIPIENT] == self::VALID_RECIPIENT_TOKEN) {
-                if ($data[Pushover\Request::PRIORITY] == Pushover\Request::PRIORITY_EMERGENCY) {
+                if (isset($data[Pushover\Request::PRIORITY]) && $data[Pushover\Request::PRIORITY] == Pushover\Request::PRIORITY_EMERGENCY) {
                     $simulatedResponse = file_get_contents(dirname(__FILE__) . '/sendEmergencyMessage.txt');
                 } else {
                     $simulatedResponse = file_get_contents(dirname(__FILE__) . '/sendSimpleMessage.txt');
