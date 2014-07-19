@@ -209,6 +209,6 @@ if (!$client->validate($validateRequest)) {
 
 Note that if you copy/paste this code directly and run it, you'll flood the Pushover API with a lot of requests in a fraction of a second. They don't like that, so you shouldn't do that. Keep their friendliness rules in mind when you use these classes.
 
-Also note that most of this code is hardly tested at all. If you find any bugs in it, please raise an issue on Github.
+If you find any bugs in it, please raise an issue on Github or fork this project and create a pull request.
 
 Happy coding!
