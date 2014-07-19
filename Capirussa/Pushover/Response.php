@@ -182,6 +182,12 @@ class Response
                 $response['status'] = substr($responseLine, 9, 3);
             } else {
                 $header = explode(':', $responseLine, 2);
+
+                // sanity check
+                if (!isset($header[1])) {
+                    continue;
+                }
+
                 $response['headers'][trim($header[0])] = trim($header[1]);
             }
         }
