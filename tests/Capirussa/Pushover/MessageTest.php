@@ -81,7 +81,7 @@ class MessageTest extends PHPUnit_Framework_TestCase
         $message->setRecipient(MockClient::INVALID_RECIPIENT_TOKEN);
     }
 
-    public function testSetRecipientWithValidButIncorrectReceipient()
+    public function testSetRecipientWithValidButIncorrectRecipient()
     {
         $message = new Message();
 
@@ -91,7 +91,7 @@ class MessageTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(MockClient::INCORRECT_RECIPIENT_TOKEN, $this->getObjectAttribute($message, 'recipient'));
     }
 
-    public function testSetRecipientWithValidReceipient()
+    public function testSetRecipientWithValidRecipient()
     {
         $message = new Message();
 
