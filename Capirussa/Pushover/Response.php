@@ -212,7 +212,7 @@ class Response
                     $this->status = $body['status'] == 1 ? self::STATUS_SUCCESS : self::STATUS_FAILURE;
                 }
 
-                if (isset($body['group']) && $body['group'] != 0) {
+                if (isset($body['group']) && (string)$body['group'] !== '0') {
                     $this->group = $body['group'];
                 }
 
