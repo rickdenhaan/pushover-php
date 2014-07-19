@@ -579,7 +579,7 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
     public function testSetTimestampWithDateTimeInOtherTimeZone()
     {
-        $dateTime = new \DateTime('2014-07-18 12:30:00', new \DateTimeZone('PST'));
+        $dateTime = new \DateTime('2014-07-18 20:30:00', new \DateTimeZone('Europe/London'));
 
         $message = new Message();
 
