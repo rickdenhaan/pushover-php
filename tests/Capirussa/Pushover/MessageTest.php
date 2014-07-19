@@ -795,15 +795,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(12345, $this->getObjectAttribute($message, 'expire'));
     }
 
-    public function testSetExpireWithValidExpireBinary()
-    {
-        $message = new Message();
-
-        $message->setExpire(0b11000000111001);
-
-        $this->assertEquals(12345, $this->getObjectAttribute($message, 'expire'));
-    }
-
     public function testSetExpireWithValidExpireString()
     {
         $message = new Message();
@@ -892,15 +883,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
         $message = new Message();
 
         $message->setRetry(0x3039);
-
-        $this->assertEquals(12345, $this->getObjectAttribute($message, 'retry'));
-    }
-
-    public function testSetRetryWithValidRetryBinary()
-    {
-        $message = new Message();
-
-        $message->setRetry(0b11000000111001);
 
         $this->assertEquals(12345, $this->getObjectAttribute($message, 'retry'));
     }
