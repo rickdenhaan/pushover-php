@@ -111,7 +111,8 @@ class ResponseTest extends PHPUnit_Framework_TestCase
     {
         new Response(
             'HTTP/1.1 200 OK' . "\r\n" .
-            'Content-Type:' . "\r\n" . // invalid because there is no content type specified, should throw a warning if not properly handler
+            'Content-Type:' . "\r\n" . // invalid because there is no content type specified, should throw a warning if not properly handled
+            'Cache-Control no-cache' . "\r\n" . // invalid because there is no semicolon, should not pose a problem
             'Connection: Close'
         );
 
