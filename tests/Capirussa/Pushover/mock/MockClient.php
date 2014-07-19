@@ -58,8 +58,6 @@ class MockClient extends Pushover\Client
             } else {
                 $simulatedResponse = file_get_contents(dirname(__FILE__) . '/pollValidReceipt.txt');
             }
-        } else {
-            throw new Pushover\Exception('Invalid request');
         }
 
         // the response should contain \r\n line endings, but Git sometimes screws that up
