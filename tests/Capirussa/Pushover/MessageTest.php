@@ -61,7 +61,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @expectedExceptionMessage Missing argument 1
      */
     public function testSetRecipientWithoutRecipient()
     {
@@ -104,7 +103,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @expectedExceptionMessage Missing argument 1
      */
     public function testSetMessageWithoutMessage()
     {
@@ -179,7 +177,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @expectedExceptionMessage Missing argument 1
      */
     public function testSetTitleWithoutTitle()
     {
@@ -254,7 +251,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @expectedExceptionMessage Missing argument 1
      */
     public function testSetDeviceWithoutDevice()
     {
@@ -297,7 +293,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @expectedExceptionMessage Missing argument 1
      */
     public function testSetUrlWithoutUrl()
     {
@@ -356,7 +351,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @expectedExceptionMessage Missing argument 1
      */
     public function testSetUrlTitleWithoutTitle()
     {
@@ -415,7 +409,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @expectedExceptionMessage Missing argument 1
      */
     public function testSetPriorityWithoutPriority()
     {
@@ -536,7 +529,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @expectedExceptionMessage Missing argument 1
      */
     public function testSetTimestampWithoutTimestamp()
     {
@@ -590,7 +582,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @expectedExceptionMessage Missing argument 1
      */
     public function testSetSoundWithoutSound()
     {
@@ -679,7 +670,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @expectedExceptionMessage Missing argument 1
      */
     public function testSetCallbackUrlWithoutUrl()
     {
@@ -725,7 +715,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @expectedExceptionMessage Missing argument 1
      */
     public function testSetExpireWithoutExpire()
     {
@@ -806,7 +795,6 @@ class MessageTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @expectedExceptionMessage Missing argument 1
      */
     public function testSetRetryWithoutRetry()
     {
