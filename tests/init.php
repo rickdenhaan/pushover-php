@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
+
 /**
  * Prepares a simple autoloader for the Capirussa\Pushover namespace
  */
