@@ -326,7 +326,7 @@ class Message implements Request
     public function setPriority($priority)
     {
         // validate the message priority
-        if (!in_array($priority, array(Request::PRIORITY_INVISIBLE, Request::PRIORITY_SILENT, Request::PRIORITY_NORMAL, Request::PRIORITY_HIGH, Request::PRIORITY_EMERGENCY))) {
+        if (!in_array($priority, array(Request::PRIORITY_INVISIBLE, Request::PRIORITY_SILENT, Request::PRIORITY_NORMAL, Request::PRIORITY_HIGH, Request::PRIORITY_EMERGENCY), true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     '%1$s: Invalid message priority',
